@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>binary Search model</title>
+
+    <style>
+        .guessField,
+        .guessSubmit {
+            background-color: rgb(214, 225, 14);
+        }
+
+        html {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            width: 50%;
+            max-width: 800px;
+            min-width: 480px;
+            margin: 200px auto;
+            background-color: rgb(14, 90, 116);
+            color: rgb(13, 1, 10);
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Binary Search model</h1>
+    <p>
+        Enter Integer Search Key!
+    </p>
+
+    <div class="form">
+        <label for="guessField">Enter a Number </label>
+        <input type="text" id="guessField" class="guessField">
+        <input type="submit" value="Submit" class="guessSubmit" id="submitguess">
+        <p id="array"></p>
+    </div>
+
+    <script type="text/javascript">
+        document.getElementById("submitguess").onclick = function () {
+            let s = "";
+            var items = [0];
+            for (let i = 1; i <= 14; i++) items.push(2 * i);
+            var y = document.getElementById("guessField").value;
+            value = y;
+            var firstIndex = 0,
+            lastIndex = items.length - 1,
+            middleIndex = Math.floor((lastIndex + firstIndex) / 2);
+            while (items[middleIndex] != value && firstIndex < lastIndex) {
+                for (let i = firstIndex; i <= lastIndex; i++) {
+                    if (i === middleIndex) {
+                        s += items[i] + "* ";
+                        continue;
+                    }
+                    // console.log(s);
+                    s += items[i] + " ";
+                }
+                s += "<br>";
+                if (value < items[middleIndex]) {
+                    lastIndex = middleIndex - 1;
+                } else if (value > items[middleIndex]) {
+                    firstIndex = middleIndex + 1;
+                }
+                middleIndex = Math.floor((lastIndex + firstIndex) / 2);
+            }
+            // console.log(middleIndex);
+
+            (items[middleIndex] != value) ? -1 : middleIndex;
+            s += items[middleIndex] + "*<br>";
+            s += "Found value in element " + middleIndex;
+            console.log(s);
+            document.getElementById("array").innerHTML = s;
+        }
+    </script>
+</body>
+
+</html>
